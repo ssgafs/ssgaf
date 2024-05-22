@@ -9,24 +9,23 @@
 <body>
     <h1>Tap Game</h1>
     <p>Нажмите кнопку, чтобы заработать очки.</p>
+    <button id="tapButton">Tap me!</button>
+    <p id="score">Счет: 0</p>
 
     <script>
         let score = parseInt(localStorage.getItem('score')) || 0;
 
         function updateScore() {
             score += 1;
+            document.getElementById('score').innerText = 'Счет: ' + score;
+            localStorage.setItem('score', score);
+            // Отправляем данные обратно в бот
             Telegram.WebApp.sendData(score.toString());
         }
 
-        Telegram.WebApp.onUpdate((data) => {
-            score = parseInt(data) || 0;
-            document.body.innerHTML = '<h1>Tap Game</h1>' +
-                '<p>Нажмите кнопку, чтобы заработать очки.</p>' +
-                '<button id="tapButton">Tap me!</button>' +
-                '<p id="score">Счет: ' + score + '</p>';
+        document.getElementById('tapButton').addEventListener('click', updateScore);
 
-            document.getElementById('tapButton').addEventListener('click', updateScore);
-        });
+        Telegram.WebApp.open();
 
         Telegram.WebApp.ready();
     </script>
