@@ -61,7 +61,7 @@
 <body>
     <div class="container">
         <div class="main-title">MarsCoin</div>
-        <div class="main-icon" onclick="incrementExperience()"></div>
+        <div class="main-icon" onclick="increment()"></div>
         <div class="coin-count">Монеты: 0</div>
         <div class="progress-bar">
             <div></div>
@@ -75,8 +75,9 @@
         let level = 1;
         let xpForNextLevel = 500;
 
-        function incrementExperience() {
-            experience += 10;
+        function increment() {
+            coins += 1; // Добавляем монеты за клик
+            experience += 10; // Добавляем опыт за клик
             if (experience >= xpForNextLevel) {
                 level++;
                 experience = experience - xpForNextLevel;
