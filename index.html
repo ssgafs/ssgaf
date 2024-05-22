@@ -7,12 +7,14 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAD06Xxm5GvwcQQmqq_Ofw6mgUHb-egxzrUg_igB9hUKVys73bdVqWKq4pAvEJlFgSAic&usqp=CAU'); /* Замените URL на адрес вашего изображения */
-            background-size: cover;
-            background-position: center;
+            background-color: #000;
             color: #fff;
             font-family: Arial, sans-serif;
             text-align: center;
+        }
+
+        h1 {
+            color: #fff;
         }
 
         .container {
@@ -23,134 +25,166 @@
             height: 100vh;
         }
 
-        .button {
+        button {
             padding: 10px 20px;
             font-size: 18px;
             margin-top: 20px;
-            background-color: #808080; /* Серый цвет */
+            background-color: #444;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: transform 0.2s ease;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease; /* добавляем плавное изменение при наведении */
         }
 
-        .button:hover {
-            background-color: #606060; /* Темно-серый при наведении */
+        button:hover {
+            background-color: #555;
         }
 
-        .button:active {
-            transform: translateY(2px);
+        #score {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+
+        #shop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        #shop-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* CSS анимация для тряски кнопки */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Применяем анимацию при нажатии на кнопку */
+        button:active {
+            animation: shake 0.3s ease;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Tap Game</h1>
-        <button id="tapButton" class="button">Tap me! (0)</button>
-        <p id="score" style="display: none;">Score: 0</p>
-        <button id="shopButton" class="button">Shop</button>
-        <button id="profileButton" class="button">Profile</button>
+        <button id="tapButton">Tap me! (0)</button>
+        <p id="score" style="display: none;">Счет: 0</p>
+        <button id="shopButton">Магазин</button>
+        <button id="profileButton">Профиль</button>
     </div>
 
-    <div id="shop" style="display: none;">
+    <div id="shop">
         <div id="shop-content">
-            <h2>Shop</h2>
-            <p>Buy Booster (Cost: 100 coins)</p>
-            <button id="buyBoosterButton" class="button">Buy</button>
-            <p>Buy Dotcoin (Cost: 500 taps)</p>
-            <button id="buyDotcoinButton" class="button">Buy</button>
-            <button id="closeShopButton" class="button">Close</button>
+            <h2>Магазин</h2>
+            <p>Купить ускоритель (Стоимость: 100 монет)</p>
+            <button id="buyBoosterButton">Купить</button>
+            <p>Купить Dotcoin (Стоимость: 500 тапов)</p>
+            <button id="buyDotcoinButton">Купить</button>
+            <button id="closeShopButton">Закрыть</button>
         </div>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let score = parseInt(localStorage.getItem('score')) || 0;
-            let boosterActive = false;
+        let score = parseInt(localStorage.getItem('score')) || 0;
+        let boosterActive = false;
 
-            function updateScore() {
-                if (boosterActive) {
-                    score += 2;
-                } else {
-                    score += 1;
-                }
-                document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
-                checkShopAvailability();
+        function updateScore() {
+            if (boosterActive) {
+                score += 2;
+            } else {
+                score += 1;
+            }
+            document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
+            checkShopAvailability();
+            localStorage.setItem('score', score);
+            Telegram.WebApp.sendData(score.toString());
+        }
+
+        function buyBooster() {
+            if (score >= 100) {
+                score -= 100;
                 localStorage.setItem('score', score);
-                Telegram.WebApp.sendData(score.toString());
+                document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
+                boosterActive = true;
+                document.getElementById('buyBoosterButton').disabled = true;
+                setTimeout(function() {
+                    boosterActive = false;
+                    document.getElementById('buyBoosterButton').disabled = false;
+                }, 3600000); // 1 час в миллисекундах
+                alert('Вы успешно купили ускоритель!');
+            } else {
+                alert('Недостаточно монет для покупки ускорителя!');
             }
+        }
 
-            function buyBooster() {
-                if (score >= 100) {
-                    score -= 100;
-                    localStorage.setItem('score', score);
-                    document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
-                    boosterActive = true;
-                    document.getElementById('buyBoosterButton').disabled = true;
-                    setTimeout(function() {
-                        boosterActive = false;
-                        document.getElementById('buyBoosterButton').disabled = false;
-                    }, 3600000); // 1 час в миллисекундах
-                    alert('Вы успешно купили ускоритель!');
-                } else {
-                    alert('Недостаточно монет для покупки ускорителя!');
-                }
+        function buyDotcoin() {
+            if (score >= 500) {
+                score -= 500;
+                localStorage.setItem('score', score);
+                document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
+                alert('Вы успешно купили Dotcoin!');
+            } else {
+                alert('Недостаточно монет для покупки Dotcoin!');
             }
+        }
 
-            function buyDotcoin() {
-                if (score >= 500) {
-                    score -= 500;
-                    localStorage.setItem('score', score);
-                    document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
-                    alert('Вы успешно купили Dotcoin!');
-                } else {
-                    alert('Недостаточно монет для покупки Dotcoin!');
-                }
-            }
-
-            function checkShopAvailability() {
-                if (score >= 100) {
-                    document.getElementById('shop').style.display = 'block';
-                } else {
-                    document.getElementById('shop').style.display = 'none';
-            }
-
-            document.getElementById('tapButton').addEventListener('click', updateScore);
-            document.getElementById('buyBoosterButton').addEventListener('click', buyBooster);
-            document.getElementById('shopButton').addEventListener('click', function() {
+        function checkShopAvailability() {
+            if (score >= 100) {
                 document.getElementById('shop').style.display = 'block';
-            });
-            document.getElementById('closeShopButton').addEventListener('click', function() {
+            } else {
                 document.getElementById('shop').style.display = 'none';
-            });
-            document.getElementById('profileButton').addEventListener('click', function() {
-                alert('Ваш профиль:\nНатапано раз: ' + score);
-            });
-            document.getElementById('buyDotcoinButton').addEventListener('click', buyDotcoin);
+            }
+        }
 
-            Telegram.WebApp.open();
-
-            Telegram.WebApp.onUpdate((data) => {
-                if (data === 'booster') {
-                    alert('Ваш ускоритель активирован!');
-                    setTimeout(function() {
-                        alert('Ваш ускоритель закончился!');
-                    }, 3600000); // 1 час в миллисекундах
-                } else {
-                    score = parseInt(data) || 0;
-                    document.getElementById('score').innerText = 'Счет: ' + score;
-                    document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
-                    localStorage.setItem('score', score);
-                    checkShopAvailability();
-                }
-            });
-
-            Telegram.WebApp.open();
+        document.getElementById('tapButton').addEventListener('click', updateScore);
+        document.getElementById('buyBoosterButton').addEventListener('click', buyBooster);
+        document.getElementById('shopButton').addEventListener('click', function() {
+            document.getElementById('shop').style.display = 'block';
         });
+        document.getElementById('closeShopButton').addEventListener('click', function() {
+            document.getElementById('shop').style.display = 'none';
+        });
+        document.getElementById('profileButton').addEventListener('click', function() {
+            alert('Ваш профиль:\nНатапано раз: ' + score);
+        });
+        document.getElementById('buyDotcoinButton').addEventListener('click', buyDotcoin);
+
+        Telegram.WebApp.open();
+
+        Telegram.WebApp.onUpdate((data) => {
+            if (data === 'booster') {
+                alert('Ваш ускоритель активирован!');
+                setTimeout(function() {
+                    alert('Ваш ускоритель закончился!');
+                }, 3600000); // 1 час в миллисекундах
+            } else {
+                score = parseInt(data) || 0;
+                document.getElementById('score').innerText = 'Счет: ' + score;
+                document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
+                localStorage.setItem('score', score);
+                checkShopAvailability();
+            }
+        });
+
+        Telegram.WebApp.open();
     </script>
 </body>
 </html>
-
-               
