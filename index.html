@@ -44,6 +44,10 @@
             margin-top: 20px;
             font-size: 24px;
         }
+
+        #shop {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -52,6 +56,11 @@
         <p>Нажмите кнопку, чтобы заработать очки.</p>
         <button id="tapButton">Tap me! (0)</button>
         <p id="score" style="display: none;">Счет: 0</p>
+        <div id="shop" style="display: none;">
+            <h2>Магазин</h2>
+            <p>Ускоритель фарма (Стоимость: 100 монет)</p>
+            <button id="buyButton">Купить</button>
+        </div>
     </div>
 
     <script>
@@ -60,23 +69,56 @@
         function updateScore() {
             score += 1;
             document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
+            checkShopAvailability();
             localStorage.setItem('score', score);
             Telegram.WebApp.sendData(score.toString());
         }
 
+        function buyBooster() {
+            if (score >= 100) {
+                score -= 100;
+                localStorage.setItem('score', score);
+                document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
+                // Отправляем данные обратно в бот
+                Telegram.WebApp.sendData('booster');
+                alert('Вы успешно купили ускоритель фарма!');
+                setTimeout(function() {
+                    alert('Ваш ускоритель фарма закончился!');
+                }, 3600000); // 1 час в миллисекундах
+            } else {
+                alert('Недостаточно монет для покупки ускорителя фарма!');
+            }
+        }
+
+        function checkShopAvailability() {
+            if (score >= 100) {
+                document.getElementById('shop').style.display = 'block';
+            } else {
+                document.getElementById('shop').style.display = 'none';
+            }
+        }
+
         document.getElementById('tapButton').addEventListener('click', updateScore);
+        document.getElementById('buyButton').addEventListener('click', buyBooster);
 
         Telegram.WebApp.open();
 
         Telegram.WebApp.onUpdate((data) => {
-            score = parseInt(data) || 0;
-            document.getElementById('score').innerText = 'Счет: ' + score;
-            document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
-            localStorage.setItem('score', score);
+            if (data === 'booster') {
+                alert('Ваш ускоритель фарма активирован!');
+                setTimeout(function() {
+                    alert('Ваш ускоритель фарма закончился!');
+                }, 3600000); // 1 час в миллисекундах
+            } else {
+                score = parseInt(data) || 0;
+                document.getElementById('score').innerText = 'Счет: ' + score;
+                document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
+                localStorage.setItem('score', score);
+                checkShopAvailability();
+            }
         });
 
         Telegram.WebApp.ready();
     </script>
 </body>
 </html>
-
