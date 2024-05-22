@@ -7,7 +7,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7yxmdNWOloSQkK0ynsDZGpWwvRQexzTS-Dg&s'); /* Замените URL на адрес вашего изображения */
+            background-image: url('https://example.com/background.jpg'); /* Замените URL на адрес вашего изображения */
             background-size: cover;
             background-position: center;
             color: #fff;
@@ -66,90 +66,91 @@
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let score = parseInt(localStorage.getItem('score')) || 0;
+            let boosterActive = false;
 
-    <script>
-         let score = parseInt(localStorage.getItem('score')) || 0;
-        let boosterActive = false;
-
-        function updateScore() {
-            if (boosterActive) {
-                score += 2;
-            } else {
-                score += 1;
-            }
-            document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
-            checkShopAvailability();
-            localStorage.setItem('score', score);
-            Telegram.WebApp.sendData(score.toString());
-        }
-
-        function buyBooster() {
-            if (score >= 100) {
-                score -= 100;
-                localStorage.setItem('score', score);
+            function updateScore() {
+                if (boosterActive) {
+                    score += 2;
+                } else {
+                    score += 1;
+                }
                 document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
-                boosterActive = true;
-                document.getElementById('buyBoosterButton').disabled = true;
-                setTimeout(function() {
-                    boosterActive = false;
-                    document.getElementById('buyBoosterButton').disabled = false;
-                }, 3600000); // 1 час в миллисекундах
-                alert('Вы успешно купили ускоритель!');
-            } else {
-                alert('Недостаточно монет для покупки ускорителя!');
-            }
-        }
-
-        function buyDotcoin() {
-            if (score >= 500) {
-                score -= 500;
-                localStorage.setItem('score', score);
-                document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
-                alert('Вы успешно купили Dotcoin!');
-            } else {
-                alert('Недостаточно монет для покупки Dotcoin!');
-            }
-        }
-
-        function checkShopAvailability() {
-            if (score >= 100) {
-                document.getElementById('shop').style.display = 'block';
-            } else {
-                document.getElementById('shop').style.display = 'none';
-            }
-        }
-
-        document.getElementById('tapButton').addEventListener('click', updateScore);
-        document.getElementById('buyBoosterButton').addEventListener('click', buyBooster);
-        document.getElementById('shopButton').addEventListener('click', function() {
-            document.getElementById('shop').style.display = 'block';
-        });
-        document.getElementById('closeShopButton').addEventListener('click', function() {
-            document.getElementById('shop').style.display = 'none';
-        });
-        document.getElementById('profileButton').addEventListener('click', function() {
-            alert('Ваш профиль:\nНатапано раз: ' + score);
-        });
-        document.getElementById('buyDotcoinButton').addEventListener('click', buyDotcoin);
-
-        Telegram.WebApp.open();
-
-        Telegram.WebApp.onUpdate((data) => {
-            if (data === 'booster') {
-                alert('Ваш ускоритель активирован!');
-                setTimeout(function() {
-                    alert('Ваш ускоритель закончился!');
-                }, 3600000); // 1 час в миллисекундах
-            } else {
-                score = parseInt(data) || 0;
-                document.getElementById('score').innerText = 'Счет: ' + score;
-                document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
-                localStorage.setItem('score', score);
                 checkShopAvailability();
+                localStorage.setItem('score', score);
+                Telegram.WebApp.sendData(score.toString());
             }
-        });
 
-        Telegram.WebApp.open();
+            function buyBooster() {
+                if (score >= 100) {
+                    score -= 100;
+                    localStorage.setItem('score', score);
+                    document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
+                    boosterActive = true;
+                    document.getElementById('buyBoosterButton').disabled = true;
+                    setTimeout(function() {
+                        boosterActive = false;
+                        document.getElementById('buyBoosterButton').disabled = false;
+                    }, 3600000); // 1 час в миллисекундах
+                    alert('Вы успешно купили ускоритель!');
+                } else {
+                    alert('Недостаточно монет для покупки ускорителя!');
+                }
+            }
+
+            function buyDotcoin() {
+                if (score >= 500) {
+                    score -= 500;
+                    localStorage.setItem('score', score);
+                    document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
+                    alert('Вы успешно купили Dotcoin!');
+                } else {
+                    alert('Недостаточно монет для покупки Dotcoin!');
+                }
+            }
+
+            function checkShopAvailability() {
+                if (score >= 100) {
+                    document.getElementById('shop').style.display = 'block';
+                } else {
+                    document.getElementById('shop').style.display = 'none';
+            }
+
+            document.getElementById('tapButton').addEventListener('click', updateScore);
+            document.getElementById('buyBoosterButton').addEventListener('click', buyBooster);
+            document.getElementById('shopButton').addEventListener('click', function() {
+                document.getElementById('shop').style.display = 'block';
+            });
+            document.getElementById('closeShopButton').addEventListener('click', function() {
+                document.getElementById('shop').style.display = 'none';
+            });
+            document.getElementById('profileButton').addEventListener('click', function() {
+                alert('Ваш профиль:\nНатапано раз: ' + score);
+            });
+            document.getElementById('buyDotcoinButton').addEventListener('click', buyDotcoin);
+
+            Telegram.WebApp.open();
+
+            Telegram.WebApp.onUpdate((data) => {
+                if (data === 'booster') {
+                    alert('Ваш ускоритель активирован!');
+                    setTimeout(function() {
+                        alert('Ваш ускоритель закончился!');
+                    }, 3600000); // 1 час в миллисекундах
+                } else {
+                    score = parseInt(data) || 0;
+                    document.getElementById('score').innerText = 'Счет: ' + score;
+                    document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
+                    localStorage.setItem('score', score);
+                    checkShopAvailability();
+                }
+            });
+
+            Telegram.WebApp.open();
+        });
     </script>
 </body>
 </html>
+
+               
