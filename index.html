@@ -34,6 +34,7 @@
             background-size: cover;
             margin: 20px auto;
             border-radius: 50%;
+            cursor: pointer; /* Добавлено */
         }
         .coin-count {
             font-size: 2.5em;
@@ -100,6 +101,18 @@
         let level = 1;
         let xpForNextLevel = 500;
 
+        // Получение сохраненных данных из локального хранилища при загрузке страницы
+        let savedCoins = localStorage.getItem('coins');
+        let savedExperience = localStorage.getItem('experience');
+        let savedLevel = localStorage.getItem('level');
+        let savedXpForNextLevel = localStorage.getItem('xpForNextLevel');
+
+        // Инициализация значений или использование сохраненных значений, если они существуют
+        coins = savedCoins ? parseInt(savedCoins) : 0;
+        experience = savedExperience ? parseInt(savedExperience) : 0;
+        level = savedLevel ? parseInt(savedLevel) : 1;
+        xpForNextLevel = savedXpForNextLevel ? parseInt(savedXpForNextLevel) : 500;
+
         function increment() {
             coins += 1; // Добавляем монеты за клик
             experience += 10; // Добавляем опыт за клик
@@ -109,6 +122,7 @@
                 xpForNextLevel += 500;
             }
             updateUI();
+            saveData(); // Сохраняем данные при каждом изменении
         }
 
         function updateUI() {
@@ -126,7 +140,15 @@
             alert("У вас 5 уровней: Новичок, Опытный, Продвинутый, Эксперт и Мастер.\nВаш текущий уровень: Новичок.\nДля повышения уровня соберите определенное количество опыта или достигните определенного количества очков.");
         }
 
-        // Initial UI update
+        // Сохранение данных в локальное хранилище браузера
+        function saveData() {
+            localStorage.setItem('coins', coins);
+            localStorage.setItem('experience', experience);
+            localStorage.setItem('level', level);
+            localStorage.setItem('xpForNextLevel', xpForNextLevel);
+        }
+
+        // Обновление интерфейса при загрузке страницы
         updateUI();
     </script>
 </body>
