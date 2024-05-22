@@ -7,14 +7,12 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
-            background-color: #000;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6qlp0Y8D9Y-AsTEwaoWro6FzBGUrHOm5d0g&s'); /* Замените URL на адрес вашего изображения */
+            background-size: cover;
+            background-position: center;
             color: #fff;
             font-family: Arial, sans-serif;
             text-align: center;
-        }
-
-        h1 {
-            color: #fff;
         }
 
         .container {
@@ -25,85 +23,50 @@
             height: 100vh;
         }
 
-        button {
+        .button {
             padding: 10px 20px;
             font-size: 18px;
             margin-top: 20px;
-            background-color: #444;
+            background-color: #FFD700;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: transform 0.2s ease; /* добавляем плавное изменение при наведении */
+            transition: transform 0.2s ease;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        button:hover {
-            background-color: #555;
+        .button:hover {
+            background-color: #FFC700;
         }
 
-        #score {
-            margin-top: 20px;
-            font-size: 24px;
-        }
-
-        #shop {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-
-        #shop-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #222;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        /* CSS анимация для тряски кнопки */
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
-            100% { transform: translateX(0); }
-        }
-
-        /* Применяем анимацию при нажатии на кнопку */
-        button:active {
-            animation: shake 0.3s ease;
+        .button:active {
+            transform: translateY(2px);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Tap Game</h1>
-        <button id="tapButton">Tap me! (0)</button>
-        <p id="score" style="display: none;">Счет: 0</p>
-        <button id="shopButton">Магазин</button>
-        <button id="profileButton">Профиль</button>
+        <button id="tapButton" class="button">Tap me! (0)</button>
+        <p id="score" style="display: none;">Score: 0</p>
+        <button id="shopButton" class="button">Shop</button>
+        <button id="profileButton" class="button">Profile</button>
     </div>
 
-    <div id="shop">
+    <div id="shop" style="display: none;">
         <div id="shop-content">
-            <h2>Магазин</h2>
-            <p>Купить ускоритель (Стоимость: 100 монет)</p>
-            <button id="buyBoosterButton">Купить</button>
-            <p>Купить Dotcoin (Стоимость: 500 тапов)</p>
-            <button id="buyDotcoinButton">Купить</button>
-            <button id="closeShopButton">Закрыть</button>
+            <h2>Shop</h2>
+            <p>Buy Booster (Cost: 100 coins)</p>
+            <button id="buyBoosterButton" class="button">Buy</button>
+            <p>Buy Dotcoin (Cost: 500 taps)</p>
+            <button id="buyDotcoinButton" class="button">Buy</button>
+            <button id="closeShopButton" class="button">Close</button>
         </div>
     </div>
 
     <script>
-        let score = parseInt(localStorage.getItem('score')) || 0;
+         let score = parseInt(localStorage.getItem('score')) || 0;
         let boosterActive = false;
 
         function updateScore() {
@@ -188,4 +151,3 @@
     </script>
 </body>
 </html>
-
