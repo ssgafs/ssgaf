@@ -23,6 +23,10 @@
             max-width: 400px;
             padding: 20px;
         }
+        .main-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
         .main-icon {
             width: 150px;
             height: 150px;
@@ -30,10 +34,6 @@
             background-size: cover;
             margin: 20px auto;
             border-radius: 50%;
-        }
-        .main-title {
-            font-size: 1.5em;
-            margin-bottom: 10px;
         }
         .coin-count {
             font-size: 2.5em;
@@ -49,9 +49,11 @@
         .progress-bar div {
             background-color: #ff4500;
             height: 20px;
-            width: 0%; /* Начальная ширина */
+            width: 0%;
+            transition: width 0.3s;
         }
         .level {
+            font-size: 1.2em;
             margin-bottom: 20px;
         }
     </style>
@@ -61,35 +63,36 @@
         <div class="main-title">MarsCoin</div>
         <div class="main-icon" onclick="incrementExperience()"></div>
         <div class="coin-count">Монеты: 0</div>
-        <div class="level">Уровень: 1 (<span id="xp">0</span>/500 XP)</div>
         <div class="progress-bar">
-            <div id="progress"></div>
+            <div></div>
         </div>
+        <div class="level">Уровень: 1 (0/500 XP)</div>
     </div>
 
     <script>
         let coins = 0;
-        let xp = 0;
+        let experience = 0;
         let level = 1;
         let xpForNextLevel = 500;
 
         function incrementExperience() {
-            xp += 10;
-            coins += 1;
-
-            if (xp >= xpForNextLevel) {
-                level += 1;
-                xp = xp - xpForNextLevel;
+            experience += 10;
+            if (experience >= xpForNextLevel) {
+                level++;
+                experience = experience - xpForNextLevel;
                 xpForNextLevel += 500;
             }
-
-            document.querySelector('.coin-count').textContent = `Монеты: ${coins.toLocaleString()}`;
-            document.getElementById('xp').textContent = xp;
-            document.querySelector('.level').innerHTML = `Уровень: ${level} (${xp}/${xpForNextLevel} XP)`;
-
-            let progressPercentage = (xp / xpForNextLevel) * 100;
-            document.getElementById('progress').style.width = `${progressPercentage}%`;
+            updateUI();
         }
+
+        function updateUI() {
+            document.querySelector('.coin-count').textContent = `Монеты: ${coins.toLocaleString()}`;
+            document.querySelector('.progress-bar div').style.width = `${(experience / xpForNextLevel) * 100}%`;
+            document.querySelector('.level').textContent = `Уровень: ${level} (${experience}/${xpForNextLevel} XP)`;
+        }
+
+        // Initial UI update
+        updateUI();
     </script>
 </body>
 </html>
