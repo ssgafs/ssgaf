@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
+    <title>Вход</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,26 +53,35 @@
 </head>
 <body>
     <div class="container">
-        <div class="main-title">Регистрация</div>
-        <form id="registration-form">
+        <div class="main-title">Салам, проходи</div>
+        <form id="login-form">
             <input type="text" id="username" class="form-input" placeholder="Логин" required>
             <input type="password" id="password" class="form-input" placeholder="Пароль" required>
-            <button type="submit" class="submit-btn">Зарегистрироваться</button>
+            <button type="submit" class="submit-btn">Войти</button>
         </form>
     </div>
 
     <script>
-        document.getElementById("registration-form").addEventListener("submit", function(event) {
+        document.getElementById("login-form").addEventListener("submit", function(event) {
             event.preventDefault(); // Отмена стандартного поведения формы
             
             // Получаем значения из полей ввода
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
             
-            // Ваш код для отправки данных на сервер и обработки регистрации
-            // После успешной регистрации перенаправляем пользователя на главную страницу
-            window.location.href = "next.html";
+            // Проверка логина и пароля (заглушка)
+            if (username === "user" && password === "password") {
+                // Вход успешен, сохраняем данные пользователя
+                localStorage.setItem("loggedInUser", username);
+                
+                // Перенаправляем пользователя на главную страницу
+                window.location.href = "main.html";
+            } else {
+                // Ошибка входа, можно добавить здесь соответствующее сообщение для пользователя
+                alert("Неправильный логин или пароль.");
+            }
         });
     </script>
 </body>
 </html>
+
