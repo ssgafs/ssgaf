@@ -50,7 +50,7 @@
     <div class="container">
         <h1>Tap Game</h1>
         <p>Нажмите кнопку, чтобы заработать очки.</p>
-        <button id="tapButton">Tap me!</button>
+        <button id="tapButton">Tap me! (0)</button>
         <p id="score" style="display: none;">Счет: 0</p>
     </div>
 
@@ -59,7 +59,7 @@
 
         function updateScore() {
             score += 1;
-            document.getElementById('score').innerText = 'Счет: ' + score;
+            document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
             localStorage.setItem('score', score);
             Telegram.WebApp.sendData(score.toString());
         }
@@ -71,6 +71,7 @@
         Telegram.WebApp.onUpdate((data) => {
             score = parseInt(data) || 0;
             document.getElementById('score').innerText = 'Счет: ' + score;
+            document.getElementById('tapButton').innerText = 'Tap me! (' + score + ')';
             localStorage.setItem('score', score);
         });
 
@@ -78,3 +79,4 @@
     </script>
 </body>
 </html>
+
