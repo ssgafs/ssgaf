@@ -59,6 +59,7 @@
             <input type="password" id="password" class="form-input" placeholder="Пароль" required>
             <button type="submit" class="submit-btn">Зарегистрироваться</button>
         </form>
+        <p id="error-msg" style="color: red; display: none;">Неправильный пароль. Попробуйте еще раз.</p>
     </div>
 
     <script>
@@ -69,6 +70,12 @@
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
 
+            // Проверяем пароль (ваша проверка может быть более сложной)
+            if (password !== "ваш_пароль") {
+                document.getElementById("error-msg").style.display = "block";
+                return; // Прерываем выполнение функции
+            }
+
             // Ваш код для отправки данных на сервер для регистрации
             // После успешной регистрации перенаправляем пользователя на страницу входа
             window.location.href = "index.html";
@@ -76,3 +83,4 @@
     </script>
 </body>
 </html>
+
