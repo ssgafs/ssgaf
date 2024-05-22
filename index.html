@@ -15,46 +15,25 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            overflow: hidden;
         }
         .container {
             text-align: center;
-            width: 90%;
-            max-width: 400px;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             width: 100%;
-        }
-        .header span {
-            font-size: 1.2em;
+            max-width: 400px;
+            padding: 20px;
         }
         .main-icon {
             width: 150px;
             height: 150px;
-            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTihZeA0zVpTQAQDoMN7krGGpiT7X9aLZDcyA&s') no-repeat center center;
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSblLjMizribr79-2_c9sOo7cAahvfyLXkFsA&s') no-repeat center center;
             background-size: cover;
             margin: 20px auto;
-            /* Убираем белую обводку */
-            /* border: 5px solid #fff; */
             border-radius: 50%;
         }
         .main-title {
             font-size: 1.5em;
             margin-bottom: 10px;
-        }
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-        }
-        .stats div {
-            text-align: center;
-        }
-        .stats div span {
-            display: block;
-            font-size: 1.1em;
         }
         .coin-count {
             font-size: 2.5em;
@@ -65,73 +44,52 @@
             border-radius: 10px;
             overflow: hidden;
             margin-bottom: 20px;
+            width: 100%;
         }
         .progress-bar div {
             background-color: #ff4500;
             height: 20px;
-            width: 50%; /* Example progress */
+            width: 0%; /* Начальная ширина */
         }
-        .bottom-menu {
-            display: none; /* Скрываем нижнее меню */
-            justify-content: space-around;
-            width: 100%;
-            background-color: #222;
-            padding: 10px 0;
-            border-top: 2px solid #444;
-        }
-        .bottom-menu button {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1em;
+        .level {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <span>22:08</span>
-            <span>Mars Clicker</span>
-            <span>Bot</span>
-        </div>
         <div class="main-title">MarsCoin</div>
-        <div class="main-icon" onclick="incrementCoins()"></div>
-        <div class="stats">
-            <div>
-                <span>Прибыль за тап</span>
-                <span>+1</span>
-            </div>
-            <div>
-                <span>Опыт за тап</span>
-                <span>+100</span>
-            </div>
-            <div>
-                <span>Прибыль в час</span>
-                <span>+70,63K</span>
-            </div>
-        </div>
+        <div class="main-icon" onclick="incrementExperience()"></div>
         <div class="coin-count">Монеты: 0</div>
+        <div class="level">Уровень: 1 (<span id="xp">0</span>/500 XP)</div>
         <div class="progress-bar">
-            <div></div>
-        </div>
-        <div class="level">Уровень: 1 (0/100 XP)</div>
-        <div class="bottom-menu">
-            <button>Exchange</button>
-            <button>Mine</button>
-            <button>Friends</button>
-            <button>Earn</button>
-            <button>Airdrop</button>
+            <div id="progress"></div>
         </div>
     </div>
 
     <script>
         let coins = 0;
+        let xp = 0;
+        let level = 1;
+        let xpForNextLevel = 500;
 
-        function incrementCoins() {
+        function incrementExperience() {
+            xp += 10;
             coins += 1;
+
+            if (xp >= xpForNextLevel) {
+                level += 1;
+                xp = xp - xpForNextLevel;
+                xpForNextLevel += 500;
+            }
+
             document.querySelector('.coin-count').textContent = `Монеты: ${coins.toLocaleString()}`;
+            document.getElementById('xp').textContent = xp;
+            document.querySelector('.level').innerHTML = `Уровень: ${level} (${xp}/${xpForNextLevel} XP)`;
+
+            let progressPercentage = (xp / xpForNextLevel) * 100;
+            document.getElementById('progress').style.width = `${progressPercentage}%`;
         }
     </script>
 </body>
 </html>
-
