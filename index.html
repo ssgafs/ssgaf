@@ -26,7 +26,6 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            padding: 10px 0;
         }
         .header span {
             font-size: 1.2em;
@@ -37,14 +36,17 @@
             background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTihZeA0zVpTQAQDoMN7krGGpiT7X9aLZDcyA&s') no-repeat center center;
             background-size: cover;
             margin: 20px auto;
-            border: 5px solid #fff;
+            /* Убираем белую обводку */
+            /* border: 5px solid #fff; */
             border-radius: 50%;
-            cursor: pointer;
+        }
+        .main-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
         }
         .stats {
             display: flex;
             justify-content: space-around;
-            width: 100%;
             margin: 20px 0;
         }
         .stats div {
@@ -54,25 +56,23 @@
             display: block;
             font-size: 1.1em;
         }
-        .coin-count, .level-info {
-            font-size: 2em;
-            margin: 10px 0;
+        .coin-count {
+            font-size: 2.5em;
+            margin: 20px 0;
         }
         .progress-bar {
             background-color: #444;
             border-radius: 10px;
             overflow: hidden;
             margin-bottom: 20px;
-            width: 100%;
-            height: 20px;
         }
         .progress-bar div {
             background-color: #ff4500;
-            height: 100%;
-            width: 0%;
+            height: 20px;
+            width: 50%; /* Example progress */
         }
         .bottom-menu {
-            display: flex;
+            display: none; /* Скрываем нижнее меню */
             justify-content: space-around;
             width: 100%;
             background-color: #222;
@@ -94,6 +94,7 @@
             <span>Mars Clicker</span>
             <span>Bot</span>
         </div>
+        <div class="main-title">MarsCoin</div>
         <div class="main-icon" onclick="incrementCoins()"></div>
         <div class="stats">
             <div>
@@ -110,10 +111,10 @@
             </div>
         </div>
         <div class="coin-count">Монеты: 0</div>
-        <div class="level-info">Уровень: 1 (0/100 XP)</div>
         <div class="progress-bar">
             <div></div>
         </div>
+        <div class="level">Уровень: 1 (0/100 XP)</div>
         <div class="bottom-menu">
             <button>Exchange</button>
             <button>Mine</button>
@@ -125,32 +126,12 @@
 
     <script>
         let coins = 0;
-        let experience = 0;
-        let level = 1;
-        let expToNextLevel = 100;
 
         function incrementCoins() {
             coins += 1;
-            experience += 100;
-
-            if (experience >= expToNextLevel) {
-                experience -= expToNextLevel;
-                level += 1;
-                expToNextLevel += 500;
-            }
-
-            updateUI();
-        }
-
-        function updateUI() {
             document.querySelector('.coin-count').textContent = `Монеты: ${coins.toLocaleString()}`;
-            document.querySelector('.level-info').textContent = `Уровень: ${level} (${experience}/${expToNextLevel} XP)`;
-
-            const progress = (experience / expToNextLevel) * 100;
-            document.querySelector('.progress-bar div').style.width = `${progress}%`;
         }
     </script>
 </body>
 </html>
-
 
