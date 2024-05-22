@@ -68,7 +68,7 @@
             <input type="password" id="password" class="form-input" placeholder="Пароль" required>
             <button type="submit" class="submit-btn">Войти</button>
         </form>
-        <a href="registration.html" class="register-link">Регистрация</a>
+        <a href="register.html" class="register-link">Регистрация</a>
     </div>
 
     <script>
@@ -85,7 +85,7 @@
                 localStorage.setItem("loggedInUser", username);
                 
                 // Перенаправляем пользователя на главную страницу
-                window.location.href = "next.html";
+                window.location.href = "index.html";
             } else {
                 // Ошибка входа, можно добавить здесь соответствующее сообщение для пользователя
                 alert("Неправильный логин или пароль.");
