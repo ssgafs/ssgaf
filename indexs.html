@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -134,119 +134,59 @@
 </head>
 <body>
     <div class="profile-button" onclick="toggleProfileMenu()">
-        <!-- Замените ссылку на изображение профиля здесь -->
-        <img src="data:image/png;base64,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" alt="Профиль">
+        <!-- Replace the profile image link with your own -->
+        <img src="https://via.placeholder.com/50" alt="Profile">
     </div>
     <div class="profile-menu" id="profileMenu">
-        <div>Монеты за последний час: <span id="coinsLastHour">0</span></div>
-        <div>Время в онлайне за 24 часа: <span id="onlineTime">0</span> мин</div>
+        <div>Profile</div>
+        <div>Settings</div>
+        <div>Logout</div>
     </div>
-
     <div class="container">
-        <div class="main-title">MarsCoin</div>
-        <div class="main-icon" onclick="increment()"></div>
+        <h1 class="main-title">Mars Clicker</h1>
+        <div class="main-icon" onclick="clickPlanet()">
+            <div class="mars-planet"></div>
+        </div>
         <div class="coin-count">
-            <!-- Замените ссылку на изображение монеты здесь -->
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAkFBMVEXUkAD/yEP/////ykXSjQD/xz3lpiD/xjn9xT//xTX/xC7dnBf/xjb6wjzWkwb//vr/+/PxtjHprCf/1XX2vDfamA3/9d//8NH/7sr/6Ln/ykv/2YX/+u7/5a//z13/0Wb/46b/3pf/zVT/5Kr/7sv/14H/243/8tb/6Lf/9eL/027/1nn/68H/3ZT/4Z//zl0nEMFaAAAP6ElEQVR4nOWd6Xbjtg6AJdHa5UXe4t2NM3HWZt7/7a4ky/EigCRIML2d4kfP6XQq6TNBAARB0Atcy3A0Xyy3j+vJfndYrXzfX60Ou/1k/bhdLuajofP3ew6fPXr7/HreiSxLizgOw8S/SBKGcVykWSb2z1/L+cbhV7ginC+P+1WaVmC+XCrUNBX743Lu6EtcEM63ExFXcAq2G87q7/vvWxeU3ISjz7WfFRS4K8wi89efI+YvYiV8W36EqRndWeI0nLyyTks+wuHy3RavHco0fF/y2Vguwpd1wYLXQhbF8wvTl7EQjra7jA+vhcwOTyxTkoFw/rfPOHwXSVL/yGBcrQnnkzh2gHeSOH63VlZLwoc9u3reSpjtH/5Bwpd3x3wnxncrRgvC+cTQs5MZi4nFfDQm3BydmBeEMTsa21VDwuGTQ/sCSRxvDYMAM8KHXfqjfLWkv82mownh8PhDE/BWwmJtMowGhIvwZxX0InHx+QOEo+fsH+KrJXsmWxwq4cPKaAAFJCYPile/3BI+pon6K7poybQsx1GUVzKr/xFF47KcJiagSfrokPCNZELrj0/65Tif9VrxznL+g1k+rkB9Gmb6+80V4UKZVrrB65dR7l1zQVL/9zwq+xTIMFy4Ifyr0Mfzp9HMU8BdY3qDqPT1IYu/HBAOJ5oaWs26MtenuxrMvEx0IdOJtmvUJdwctGxog0emu1BqQ8YH3XSVJuF8pTMFhZhGA1O8FnIQTbUYw5Xm2liPUMvGCFHOjIfveiBnpY7d0bU3WoSv6jCmUs+xZ4/XQnpjHWXNXrkInzQAGflOjFFfzZhteQi/lEaUm69lTJSIqYbXUBM+qgCFz893Yhz7KkaNEE5J+KhQ0cq+WJpPCeOgVKlqpkRUEapUVPRzV3wNYz5VICoVVUH4JAcUwo2CXiF6Y8UwpgpzIydUuAkxnbnlaxgHimFUOA0p4S8pYGVh3PM1jAqLk0ldv4xwLg1kHM/AG8S8L0UMZQljCeFGGouK0vEMvJVShhiuJGE4Tjg8SACFH/0kXzWMkUxTwwO+mMIJJ5Llkkh+TEO/EXNZiBNP6IR/SfyE6Dtz8hLEgWwy4m4RI1xIUhZi+uN4J5G5jRQzqAjhm2wOlhYD2PMGA2MT1ZPZmxDJwCGEO5xQWHjBXl72k6RfmgYKvTGOGO4ohJL1hA1gpWZ1CFb9w1QNZIjIOgMkfJAAWniJwcUaiqkpYiRBBLffIMLRCk3d2wDeGArzUcQRkxW0bQMRPqOe0GoO3n3azPQ5uKLGz3qECzTetpqDvVtbb26RJYgZsL/YJRziI2jjJjzv7mF94wdJnEbRjd66hEeM0Ng6nGR2+1kiGThAjNdqwgcsmLH40SFC34LQ89AArujY03tCdEVh85s3+4UdQvruzUUGWBge7u719J4QT8yYriZ6vUEeldN+54HlmLIDd/fQHPvM9ElOuEF11MwR9rx83O5mdx9Z76JOxwY7cZ7MLRYjKeEaMTNGZrTeY0nkmyynTf7IABK1NvfG5pZwjuioiZXR23poMU125TBrk84lhBNsSZHT+bS2jy6QPnlnFZuK4QQnxDwFPZbpRRS+FnIakRjR2KZ4QQnf4SEku/o6iWtQD1QZHhJjD1nzh+8Y4QMSkAqiJ5TnxZSM+i8aIK/JHhDCPTKERB2V5hrUjCXhTYiehnuY8AUeQqodtQJs3kdQGcSeZnOQEDGkgmhHVdthGoj6v2aODOIHRDiHnT3R12Ozn4So/0pMYeI3gBBbNZHMjK2Ktoj66/8B/IT47y7hCHkZyczI8kQUQv2Xok5x1CGEFxUiIfBVa0AOvnomEn5WOGt22Rn+JjyAf5M4hAyTsBHCWhQZxGR3Twi7CpqnYNLRWiiJONhjZC93hGvQVdBWhT35Tq0jQuR3Dde3hEN42USahfIhpFU6kww4PBPPabeWcAmuKthmYV00PNZ3JCRLg83E89mMlhBeVQjKL4kb0tMC936IJat/akYBVtPJNSG8XUh7EeqZ6i3xXkeJRT4YY/XrBI/fvBnWjnBzRfgKO0PSizAlFdPTjmiHsM4wgokAclLoPlF5kvT1ihAMuokLXyR++p5THcLmD71u0TM9KQT/uG343RCOGFyFh4T534YfJGyq128ZRULelcIcxuib8BNUUlqSG3nLReMQQu9UgHj+b5VVMsitD0CHkX5+E4JZUuqyCZ7uFxCcsGFs08ZTo8wz/PJT5rQhhD6NuvJFDM1FEWSEdfIqj8ZRPjDM8iNT5Ew4B2PShJidAQmvrIac0POUR6SkbwfVtElm1IRbKKChmmw4KKUQ2gispsW2JYR9BfEL/llCWE2bsKYmhHWY+ApkYaE7D60FZBAnQjAFRc9zw5bm4lTdEsKvj+cN4RLyhuT9Qoxw+kOEoDtOlw0hnGSjBhZYlu37p3KspWBsGh8bQiiZbxAbolUubZmeY0IwmVGn971gA9pA8p4vusIXbQWAY0JYh1abivCNZRrikff5XJRrQvAXLt4qQjjspr8fWT01NPW+oGstBbeEq+DbC74gQ2NQPCNLlgrRH3uOCcH1RfxVET6DhoYeIsqKW5tcVN8tIRhyhM8VIVTwbFRcgk7E80Nv/42dEDI1lTH1huDHmJRZ0hLC/ISgDomhN4KWTkavpyX1BfuZFFCHspEHLg6J6byzEACriWBW7oULGNVkc28BukOzIjaprem8o24NwgnZAyPThfcKLX+J6/tvoW3N1HmZGpKLEHIXxdJ7AtyhaTUwVjggpfRrdWUhhBxyvPUeIUIXBz4kkP0xx0kx0F3Ejx60cWhRR2+0C1y3nLBnhB3i2oOSNBanDkx3SRmO9YMKFE68PTA/2U7GkBhtWzOA/jjZezvoZVZHYI3LFSzPTsMRx847QK+yiqh6qh4BOCKlbK8roCU/eCt2QsWRXTljYtHDACRcuSDU6diBIlocEkcIwYDcOu6vewSYMhojgoQCjJYNA+9bRt1K/e7bTX0VvNntaAxrRGNG01FExtDFPPxmzCmN9K7fb4T4g5bmCnKGlpTICGkVkQpCfn94x9jL6ZBmgTHiD/ljGhiSpq4mvzEW07DHpQjkLKJEc0bpTCQuZV5bED8AR6QPIra24F0f8hHS0wzY+pB1jU8hVOWP6ZVRyBp/y5inIREqDn8ZnJdD8jRg7axpro1AWFdfyk7w0X9lLNfGmC8lEvaaU6YoInn7C8uXcua8aYT1n0l6eJGtKZbz5tu3MCBsjp1ju+PUiYjtWwzBgNyBQ8TqS7HycHLZGbb3BJdiOHAX2C435ieppgbdP2TbAzYlRGuNqCc70T1grn185ReghPBuB5UQ38fnqsVQCV6LAdcwUwnxWgyuehqvWUHkOVbnK6k2QcqLae/G62k24CrfwNT0Bs0qsK7VhtLzkkp2FkK8Joqprq3po3p6iRAJoAJUQuon4HVtcG0iPaq56VUG9N+laimRUFabyFJfej8O3Z0ksqUh+UOkvvSTrUYYCChqVb1+Bk6IeAvauTJZjTBHnTdUtifq3bLLV5I9Pi1yBBkEW60+sn9fHzz81lVy1EZyyfJaffvzFuj2fVOUKK0RRiNvUlilOG/BcGYGvwWq7R7Uw1ZPWKcXoqGRn5mxP/eENYo5QyZlNOiu8U8n87D/iTQNEWPFd3ZNTthA+tPp/RjmY1k2yl5Ja2/Idf5QUgF9DXkjfWmjM5qSKs8f2p8h5es1cH45JaZSnyENPizPAfM0bTF7t4eZ8utzwNZnuRk7YrRCCos1znJvrM/j86opsZmDxnl8+54K9LpLGSAxCQUD3vRUgNcXpF4/rHpKa3UAh4zpbV+MIdxPkLDMrhC5GKmFClq9TRj60/RmxkVC5i/10CGM7/rTMPUYMq5nMweshhB8aafHEE+fqIH6li0VH7Wbr3afqGDL0GXIqmbvBNgn1yZq9/pi6dd2YjSqg2peRq8vxWrnRbdfG0/PvRMjqf3s1VcZ1AgTeu4x9U08MQJdZ5R4RnXepL6JeO9Lk3Nsp/ZB2pSGV2CivS+vWglfEcLJDONu8zWkXq3XqWmL0X4erX8pVw/aa8g8ajp6S1a6TaMzwxtaqT1o2foI30IO2kupuynjE11k2pPGoI8wWy/oDmVduNf5veu++jY9aQx6QTP28wY+B7gbwfKJBv28GXuyd4X1fgvPw69HuG4i3CHk7KvvmtCsrz4a2DCUnzAT4ncjHAMZIZxX9DnKhnkJ8ZxCKL/fAlti+OZ3lDghlNxRcn+1bOeeGexOOat7ZtgJ8XtmfgcKwj//riDZfU921obzvid0x+rezICE/+o7u0KdO7v+1feuAVd1/ll353XvJPuv3n/4599hGQRff/o9pP+Bu2SRDcUW8f/0PmDk9vE/5k7n4hdC8t+9l/vfdrf6B8qBE6K3WTaIFq0PzACl94CFh260piYMNisJYmVv2Bo8afBJzkfVgCvEyigIg7mM0LbXCgkwl5d6hHMJhYww+IXG4A2i7+K4MASo2HfNMDOqJgxepYg+UK/ugG+gOASevUoZ5ISStM0JUVh2PlLzeap+Pp3EDI1Qcntuy+h2NqpmoMwRahIGX3JF5WjShfOpqwKyLxWAklC2zmgZbZt0YXyeurIDWU/QCJWKWoc4/Iw9T6M6R6mieoTBVqGoDhj1LhPOFEZGm1DlNBpETkbNy4QVboJCGPwKpeHNGbI03K2+xevNtKqOwlDq6ImEwVwao14YTW6fvuUbaBaqhCtZqEYnDDYHyWLqmjEh3z59PXx5qVlsFB8kwbYRYTD8UJrUM6Rv0iK4+h+08SojOsGXS6aE1apfktjoQE6jmT5l9RdnEaUcrtDwEgaEwS9fZzKeIetGyPWpZzlm71KOov3sMASS9yyEwWanqalnSD/pl+O8rilp5JqrkVk+LqcJ8fbHdPem/lRDwjqEw0+pYZiVJNOyHEdRXkl9nj2PonFZttd0ESv8Eo1AzYYweNCzqTDonZg8KF6BqXtGwmC0Vgc47iRbQ5svvIRBsIiNhpFB4phiYswJg+G60DeqfBIWR20naElYzcbfFKPKI+mOOgNtCKtF4w+rahxuTQbQgjAYHdOfU9UwPZItjDVhtd6Y/NB0DIuJ5jqCmTAIXiaZe8YwezebgByEFePeMWOY7a34rAkrXf1waHPi+P1F/QmOCYPg7VE4MTpJKo4W84+RsLKr298Z90CG2eHJ2H5eCwthJS/rgnEgw6JYW6tnK1yEVSz3OQlZIKunvH8aundA+Agr2Sw/wtROXeM0nLzqJpm0hJWwktHi6GeGkUBYZOL4yTL5roSbsJb59kPEaUzBDKu/LyZbBtPZEReEtcyXx/0qrTBVnGEFl4r9cemCrhZXhLWM3j6/nvciy9IirlCvMzxJBRYXaZaJ/fPX8o114t2JS8KTDEfzxXL7uJ7sd4fVSvhitTrs9pP143a5mI/4bCYm/wN/jj0NzggYmAAAAABJRU5ErkJggg==" alt="Монета" class="coin-icon">
-            <span id="coinText">0</span>
+            <img class="coin-icon" src="https://image.flaticon.com/icons/png/512/102/102018.png" alt="Coin">
+            <span id="coinCount">0</span>
         </div>
         <div class="progress-bar">
-            <div></div>
+            <div id="progressBar"></div>
         </div>
-        <div class="level">Уровень: 1 (0/500 XP)</div>
+        <div class="level">Level: <span id="level">1</span></div>
     </div>
 
     <script>
         let coins = 0;
-        let experience = 0;
         let level = 1;
-        let xpForNextLevel = 500;
 
-        let coinsLastHour = 0;
-        let onlineTime = 0;
+        function clickPlanet() {
+            coins++;
+            document.getElementById('coinCount').innerText = coins;
+            updateProgressBar();
+        }
 
-        // Получение сохраненных данных из локального хранилища при загрузке страницы
-        let savedCoins = localStorage.getItem('coins');
-        let savedExperience = localStorage.getItem('experience');
-        let savedLevel = localStorage.getItem('level');
-        let savedXpForNextLevel = localStorage.getItem('xpForNextLevel');
-        let savedCoinsLastHour = localStorage.getItem('coinsLastHour');
-        let savedOnlineTime = localStorage.getItem('onlineTime');
-
-        // Инициализация значений или использование сохраненных значений, если они существуют
-        coins = savedCoins ? parseInt(savedCoins) : 0;
-        experience = savedExperience ? parseInt(savedExperience) : 0;
-        level = savedLevel ? parseInt(savedLevel) : 1;
-        xpForNextLevel = savedXpForNextLevel ? parseInt(savedXpForNextLevel) : 500;
-        coinsLastHour = savedCoinsLastHour ? parseInt(savedCoinsLastHour) : 0;
-        onlineTime = savedOnlineTime ? parseInt(savedOnlineTime) : 0;
-
-        function increment() {
-            coins += 1; // Добавляем монеты за клик
-            coinsLastHour += 1;
-            experience += 10; // Добавляем опыт за клик
-            if (experience >= xpForNextLevel) {
+        function updateProgressBar() {
+            const progress = (coins % 10) * 10;
+            document.getElementById('progressBar').style.width = progress + '%';
+            if (progress === 0) {
                 level++;
-                experience = experience - xpForNextLevel;
-                xpForNextLevel += 500;
+                document.getElementById('level').innerText = level;
             }
-            updateUI();
-            saveData(); // Сохраняем данные при каждом изменении
-            createFlyingMars(); // Создаем летающую планету
         }
 
-        function updateUI() {
-            document.querySelector('#coinText').textContent = `${coins.toLocaleString()}`;
-            document.querySelector('.progress-bar div').style.width = `${(experience / xpForNextLevel) * 100}%`;
-            document.querySelector('.level').textContent = `Уровень: ${level} (${experience}/${xpForNextLevel} XP)`;
-            document.querySelector('#coinsLastHour').textContent = `${coinsLastHour}`;
-            document.querySelector('#onlineTime').textContent = `${onlineTime}`;
-        }
-
-        // Функция для создания летающих планет Марса
-        function createFlyingMars() {
-            const mars = document.createElement('div');
-            mars.classList.add('mars-planet');
-            mars.style.left = `${Math.random() * 100}%`;
-            document.body.appendChild(mars);
-
-            mars.addEventListener('animationend', () => {
-                mars.remove();
-            });
-        }
-
-        // Сохранение данных в локальное хранилище браузера
-        function saveData() {
-            localStorage.setItem('coins', coins);
-            localStorage.setItem('experience', experience);
-            localStorage.setItem('level', level);
-            localStorage.setItem('xpForNextLevel', xpForNextLevel);
-            localStorage.setItem('coinsLastHour', coinsLastHour);
-            localStorage.setItem('onlineTime', onlineTime);
-        }
-
-        // Обновление интерфейса при загрузке страницы
-        updateUI();
-
-        // Обновление времени в онлайне каждые 60 секунд
-        setInterval(() => {
-            onlineTime += 1;
-            updateUI();
-            saveData();
-        }, 60000);
-
-        // Сброс монет за последний час каждые 60 минут
-        setInterval(() => {
-            coinsLastHour = 0;
-            updateUI();
-            saveData();
-        }, 3600000);
-
-        // Функция для переключения видимости меню профиля
         function toggleProfileMenu() {
-            const profileMenu = document.getElementById('profileMenu');
-            profileMenu.classList.toggle('show');
+            const menu = document.getElementById('profileMenu');
+            menu.classList.toggle('show');
         }
+
+        // Random number generator for animation
+        const random = Math.random();
+
+        // Flying planet animation
+        const planet = document.querySelector('.mars-planet');
+        planet.style.animation = `fly 1s linear`;
     </script>
 </body>
 </html>
