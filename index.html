@@ -7,7 +7,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000;
+            background: url('https://cdn.pixabay.com/photo/2020/12/13/15/31/stars-5828509_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #fff;
             margin: 0;
             display: flex;
@@ -30,11 +31,12 @@
         .main-icon {
             width: 150px;
             height: 150px;
-            background: url('https://kartinki.pics/pics/uploads/posts/2022-08/thumbs/1661360602_46-kartinkin-net-p-chernoe-zvezdnoe-nebo-oboi-krasivo-65.jpg') no-repeat center center;
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEcW4UV3DUTwdnGfZKNDB3CEQtLpy7YH6avQ&s') no-repeat center center;
             background-size: cover;
             margin: 20px auto;
             border-radius: 50%;
-            cursor: pointer; /* Добавлено */
+            cursor: pointer;
+            position: relative;
         }
         .coin-count {
             font-size: 2.5em;
@@ -76,6 +78,26 @@
             width: 40px;
             height: 40px;
         }
+        .mars-planet {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEcW4UV3DUTwdnGfZKNDB3CEQtLpy7YH6avQ&s') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: fly 1s linear;
+        }
+        @keyframes fly {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-100px) translateX(calc(-50px + 100 * random));
+            }
+        }
     </style>
 </head>
 <body>
@@ -91,7 +113,6 @@
     <div class="nav-bar">
         <button onclick="navigateTo('shop.html')"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsXF8qhDV2SDENXKWnqwiD_1FafwsoLZ-Afw&s" alt="Магазин"></button>
         <button onclick="navigateTo('friends.html')"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsXF8qhDV2SDENXKWnqwiD_1FafwsoLZ-Afw&s" alt="Друзья"></button>
-        <!-- Добавлен новый кнопка для отображения информации об уровнях -->
         <button onclick="showLevels()"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsXF8qhDV2SDENXKWnqwiD_1FafwsoLZ-Afw&s" alt="О уровнях"></button>
     </div>
 
@@ -123,6 +144,7 @@
             }
             updateUI();
             saveData(); // Сохраняем данные при каждом изменении
+            createFlyingMars(); // Создаем летающую планету
         }
 
         function updateUI() {
@@ -146,6 +168,18 @@
             localStorage.setItem('experience', experience);
             localStorage.setItem('level', level);
             localStorage.setItem('xpForNextLevel', xpForNextLevel);
+        }
+
+        // Функция для создания летающих планет Марса
+        function createFlyingMars() {
+            const mars = document.createElement('div');
+            mars.classList.add('mars-planet');
+            mars.style.left = `${Math.random() * 100}%`;
+            document.body.appendChild(mars);
+
+            mars.addEventListener('animationend', () => {
+                mars.remove();
+            });
         }
 
         // Обновление интерфейса при загрузке страницы
