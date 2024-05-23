@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mars Clicker</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
-            background: url('https://cdn.pixabay.com/photo/2020/12/13/15/31/stars-5828509_1280.jpg') no-repeat center center fixed;
+            font-family: 'Roboto', sans-serif;
+            background: url('https://as1.ftcdn.net/v2/jpg/03/53/23/04/1000_F_353230456_YMF5NLCQhFdWIv1y3LViTQGlv9GdODPn.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
             margin: 0;
@@ -25,13 +27,14 @@
             padding: 20px;
         }
         .main-title {
-            font-size: 1.5em;
+            font-size: 2em;
             margin-bottom: 10px;
+            font-weight: 700;
         }
         .main-icon {
             width: 150px;
             height: 150px;
-            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEcW4UV3DUTwdnGfZKNDB3CEQtLpy7YH6avQ&s') no-repeat center center;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/e/e3/Mars_Hubble.jpg') no-repeat center center;
             background-size: cover;
             margin: 20px auto;
             border-radius: 50%;
@@ -39,8 +42,16 @@
             position: relative;
         }
         .coin-count {
-            font-size: 2.5em;
+            font-size: 2em;
             margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .coin-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
         }
         .progress-bar {
             background-color: #444;
@@ -60,29 +71,13 @@
             margin-bottom: 20px;
         }
         .nav-bar {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            background-color: #000;
-            padding: 10px 0;
-        }
-        .nav-bar button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-        }
-        .nav-bar img {
-            width: 40px;
-            height: 40px;
+            display: none;
         }
         .mars-planet {
             position: absolute;
             width: 30px;
             height: 30px;
-            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEcW4UV3DUTwdnGfZKNDB3CEQtLpy7YH6avQ&s') no-repeat center center;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/e/e3/Mars_Hubble.jpg') no-repeat center center;
             background-size: cover;
             border-radius: 50%;
             pointer-events: none;
@@ -104,7 +99,10 @@
     <div class="container">
         <div class="main-title">MarsCoin</div>
         <div class="main-icon" onclick="increment()"></div>
-        <div class="coin-count">Монеты: 0</div>
+        <div class="coin-count">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/1_Mars_coin_3D.png/1024px-1_Mars_coin_3D.png" alt="Монета" class="coin-icon">
+            <span id="coinText">0</span>
+        </div>
         <div class="progress-bar">
             <div></div>
         </div>
@@ -148,7 +146,7 @@
         }
 
         function updateUI() {
-            document.querySelector('.coin-count').textContent = `Монеты: ${coins.toLocaleString()}`;
+            document.querySelector('#coinText').textContent = `${coins.toLocaleString()}`;
             document.querySelector('.progress-bar div').style.width = `${(experience / xpForNextLevel) * 100}%`;
             document.querySelector('.level').textContent = `Уровень: ${level} (${experience}/${xpForNextLevel} XP)`;
         }
