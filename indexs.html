@@ -38,7 +38,7 @@
         .main-icon {
             width: 150px;
             height: 150px;
-            background: url('') no-repeat center center;
+            background: url('https://image.flaticon.com/icons/png/512/3722/3722173.png') no-repeat center center;
             background-size: cover;
             margin: 20px auto;
             border-radius: 50%;
@@ -177,7 +177,7 @@
             <div id="progressBar"></div>
         </div>
         <div class="level">Уровень: <span id="level">1</span></div>
-        <div class="experience">Опыт: <span id="experience">0</span></div>
+        <div class="experience">Опыт: <span id="experience">0</span> / <span id="maxExperience">1000</span></div>
     </div>
 
     <script>
@@ -202,13 +202,17 @@
                 experience = savedData.experience;
                 updateUI();
             }
+            window.addEventListener('beforeunload', function () {
+                setData('marsClickerData', { coins, level, experience });
+            });
         };
 
         function updateUI() {
             document.getElementById('coinCount').innerText = coins;
             document.getElementById('level').innerText = level;
             document.getElementById('experience').innerText = experience;
-            updateProgressBar();
+            updateProgressBar
+                        ();
         }
 
         function clickPlanet() {
@@ -220,6 +224,7 @@
 
         function updateProgressBar() {
             const maxProgress = 1000 + (level - 1) * 500;
+            document.getElementById('maxExperience').innerText = maxProgress;
             const progress = Math.min((experience / maxProgress) * 100, 100);
             document.getElementById('progressBar').style.width = progress + '%';
             if (progress === 100) {
@@ -243,11 +248,11 @@
             for (let i = 0; i < numPlanets; i++) {
                 const smallPlanet = document.createElement('div');
                 smallPlanet.classList.add('mars-planet');
-                smallPlanet.style.top = bounds.top + 'px';
-                smallPlanet.style.left = bounds.left + 'px';
                 container.appendChild(smallPlanet);
 
                 setTimeout(() => {
+                    smallPlanet.style.top = bounds.top + 'px';
+                    smallPlanet.style.left = bounds.left + 'px';
                     smallPlanet.style.transform = `translate(${Math.random() * 100}px, ${Math.random() * 100}px)`;
                     smallPlanet.style.opacity = 0;
                 }, 10);
