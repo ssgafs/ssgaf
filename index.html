@@ -3,42 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Меню</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: url('https://cerenas.club/uploads/posts/2022-12/thumbs/1670978504_cerenas-club-p-chernii-fon-kosmos-krasivo-1.jpg'); /* Путь к вашему изображению фона */
-            background-size: cover;
-            background-position: center;
-        }
-        .menu-container {
-            text-align: center;
-        }
-        .continue-button {
-            display: inline-block;
-            width: 100px;
-            height: 100px;
-            background-image: url('data:image/jpeg;base64,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'); /* Путь к вашей иконке */
-            background-size: cover;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .continue-button:hover {
-            transform: scale(1.1); /* Увеличиваем размер кнопки при наведении */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Добавляем тень */
-        }
-    </style>
+    <title>Регистрация и вход</title>
 </head>
 <body>
-    <div class="menu-container">
-        <a href="indexs.html" class="continue-button"></a>
-    </div>
+    <h1>Регистрация</h1>
+    <form action="/register" method="POST">
+        <label for="username">Имя пользователя:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Пароль:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+
+    <h1>Вход</h1>
+    <form action="/login" method="POST">
+        <label for="loginUsername">Имя пользователя:</label><br>
+        <input type="text" id="loginUsername" name="username" required><br>
+        <label for="loginPassword">Пароль:</label><br>
+        <input type="password" id="loginPassword" name="password" required><br><br>
+        <button type="submit">Войти</button>
+    </form>
 </body>
 </html>
 
