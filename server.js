@@ -1,58 +1,45 @@
-/* jshint esversion: 6 */
-/* jshint node: true */
-/* jshint bitwise: false */
-'use strict';
-
 const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
+const session = require('express-session');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = 3000;
 
+// Используем middleware для разбора тела запроса
+app.use(bodyParser.urlencoded({ extended: true }));
 
-let db = new sqlite3.Database('database.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
-  if (err) {
-    console.error(err.message);
-  }
-  console.log('Connected to the database.');
+// Используем middleware для сессий
+app.use(session({
+  secret: 'secret-key', // Секретный ключ для подписи cookie-файла
+  resave: false,
+  saveUninitialized: true
+}));
+
+// Страница регистрации
+app.get('/register', (req, res) => {
+  res.sendFile(__dirname + '/register.html');
 });
 
-
-db.serialize(() => {
-  db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)');
-});
-
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-
+// Обработка POST-запроса для регистрации
 app.post('/register', (req, res) => {
   const { username, password } = req.body;
-  db.run('INSERT INTO users (username, password) VALUES (?, ?)', [username, password], (err) => {
-    if (err) {
-      console.error(err.message);
-      res.status(500).send('Error registering user');
-    } else {
-      res.redirect('/login.html');
-    }
-  });
+
+  // Сохраняем имя пользователя в сессии
+  req.session.username = username;
+
+  res.send('Регистрация успешна!');
 });
 
-app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  db.get('SELECT * FROM users WHERE username = ? AND password = ?', [username, password], (err, row) => {
-    if (err) {
-      console.error(err.message);
-      res.status(500).send('Error logging in');
-    } else if (row) {
-      res.redirect('/profile.html');
-    } else {
-      res.status(401).send('Invalid username or password');
-    }
-  });
+// Защищенная страница
+app.get('/profile', (req, res) => {
+  // Проверяем, есть ли имя пользователя в сессии
+  if (req.session.username) {
+    res.send(`Добро пожаловать, ${req.session.username}!`);
+  } else {
+    res.redirect('/register'); // Перенаправляем на страницу регистрации, если пользователь не зарегистрирован
+  }
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Сервер запущен на http://localhost:${port}`);
 });
