@@ -1,79 +1,27 @@
-<!-- <!DOCTYPE html>
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .container {
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-        }
-        .main-title {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-        .form-input {
-            margin-bottom: 10px;
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #888;
-            background-color: #333;
-            color: #fff;
-            box-sizing: border-box;
-        }
-        .submit-btn {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #ff4500;
-            color: #fff;
-            cursor: pointer;
-        }
-        .submit-btn:hover {
-            background-color: #ff6a33;
-        }
-    </style>
+    <title>Регистрация и вход</title>
 </head>
 <body>
-    <div class="container">
-        <div class="main-title">Регистрация</div>
-        <form id="register-form">
-            <input type="text" id="username" class="form-input" placeholder="Логин" required>
-            <input type="password" id="password" class="form-input" placeholder="Пароль" required>
-            <button type="submit" class="submit-btn">Зарегистрироваться</button>
-        </form>
-    </div>
+    <h1>Регистрация</h1>
+    <form action="/register" method="POST">
+        <label for="username">Имя пользователя:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Пароль:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Зарегистрироваться</button>
+    </form>
 
-    <script>
-        document.getElementById("register-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Отмена стандартного поведения формы
-
-            // Получаем значения из полей ввода
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            // Ваш код для отправки данных на сервер для регистрации
-            // После успешной регистрации перенаправляем пользователя на страницу входа
-            window.location.href = "index.html";
-        });
-    </script>
+    <h1>Вход</h1>
+    <form action="/login" method="POST">
+        <label for="loginUsername">Имя пользователя:</label><br>
+        <input type="text" id="loginUsername" name="username" required><br>
+        <label for="loginPassword">Пароль:</label><br>
+        <input type="password" id="loginPassword" name="password" required><br><br>
+        <button type="submit">Войти</button>
+    </form>
 </body>
 </html>
- -->
